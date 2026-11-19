@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>R.O.S.E Autofill Test 1 — Plain Form (Greenhouse-style)</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background: #0b101b; color: #e2e8f0; max-width: 720px; margin: 32px auto; padding: 0 18px; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .full { grid-column: 1 / -1; }
+    label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #94a3b8; }
+    input, select, textarea { padding: 9px 11px; border-radius: 8px; border: 1px solid #334155; background: #090d16; color: #f8fafc; font-size: 14px; }
+    .radios { display: flex; gap: 18px; flex-direction: row; align-items: center; padding-top: 4px; }
+    .radios label { flex-direction: row; align-items: center; color: #e2e8f0; }
+    button { margin-top: 16px; padding: 11px 22px; border-radius: 9px; border: none; background: #22d3ee; color: #06080e; font-weight: 700; cursor: pointer; }
+    #status { margin-top: 12px; font-size: 13px; color: #10b981; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Plain Application Form (Test Page 1)</h2>
+    <p>Press <strong>Alt+Shift+F</strong> or click <strong>ROSE Fill</strong>. Verify fields fill, Resume &amp; Cover Letter skip cleanly, and Submit is never clicked.</p>
+    <form id="application_form" onsubmit="event.preventDefault(); window.__submitClicks = (window.__submitClicks || 0) + 1; document.getElementById('status').textContent = 'Submitted count: ' + window.__submitClicks;">
+      <div class="grid">
+        <label for="first_name">First Name *
+          <input id="first_name" name="first_name" autocomplete="given-name" type="text" required />
+        </label>
+        <label for="last_name">Last Name *
+          <input id="last_name" name="last_name" autocomplete="family-name" type="text" required />
+        </label>
+        <label for="email">Email Address *
+          <input id="email" name="email" autocomplete="email" type="email" required />
+        </label>
+        <label for="phone">Phone Number *
+          <input id="phone" name="phone" autocomplete="tel" type="tel" required />
+        </label>
+        <label for="location">Location (City, Country)
+          <input id="location" name="job_application_location" placeholder="Abuja, Nigeria" type="text" />
+        </label>
+        <label for="years_exp">Years of Experience
+          <input id="years_exp" name="years_experience" type="text" placeholder="e.g. 3" />
+        </label>
+        <label for="github">GitHub Profile
+          <input id="github" name="github_url" type="url" />
+        </label>
+        <label for="linkedin">LinkedIn Profile
+          <input id="linkedin" name="linkedin_profile" type="url" />
+        </label>
+        <label for="portfolio" class="full">Portfolio / Website
+          <input id="portfolio" name="website" type="url" />
+        </label>
+        <label for="work_auth">Are you legally authorized to work remotely?
+          <select id="work_auth" name="work_authorized">
+            <option value="">-- Select --</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </label>
+        <fieldset style="border:1px solid #334155; border-radius:8px; padding:8px 12px;">
+          <legend style="font-size:12px; color:#94a3b8;">Will you require visa sponsorship?</legend>
+          <div class="radios">
+            <label><input type="radio" name="require_sponsorship" value="Yes" /> Yes</label>
+            <label><input type="radio" name="require_sponsorship" value="No" /> No</label>
+          </div>
+        </fieldset>
+        <label for="projects" class="full">Short Project Highlights
+          <textarea id="projects" name="project_highlights" rows="3"></textarea>
+        </label>
+        <label for="resume">Resume / CV (Must be attached manually)
+          <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" />
+        </label>
+        <label for="cover_letter" class="full">Cover Letter (Skipped unless custom text saved)
+          <textarea id="cover_letter" name="cover_letter" rows="3"></textarea>
+        </label>
+      </div>
+      <button type="submit" id="submit_app">Submit Application</button>
+      <div id="status">Submit clicks: 0</div>
+    </form>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>R.O.S.E Autofill Test 4 — Nested Open Shadow DOM</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background: #0b101b; color: #e2e8f0; max-width: 720px; margin: 32px auto; padding: 0 18px; }
+  </style>
+</head>
+<body>
+  <h2>Nested Open Shadow DOM Application (Test Page 4)</h2>
+  <p>Zero light-DOM inputs exist here — every field lives inside nested Web Component open shadow roots.</p>
+  <rose-job-form></rose-job-form>
+
+  <script>
+    class RoseAuthWidget extends HTMLElement {
+      connectedCallback() {
+        const sr = this.attachShadow({ mode: "open" });
+        sr.innerHTML = `
+          <style>
+            .box { margin-top: 12px; padding: 14px; border: 1px solid #334155; border-radius: 10px; background: #090d16; }
+            label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: #94a3b8; margin-bottom: 10px; }
+            select, textarea, input { padding: 8px 10px; border-radius: 8px; border: 1px solid #334155; background: #111827; color: #f8fafc; }
+            .radios { display: flex; gap: 16px; }
+            .radios label { flex-direction: row; align-items: center; color: #e2e8f0; }
+          </style>
+          <div class="box">
+            <label>Authorized to work remotely?
+              <select name="authorized_to_work">
+                <option value="">-- Select --</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+            <fieldset style="border:1px solid #334155;border-radius:8px;padding:8px 12px;margin-bottom:10px;">
+              <legend style="font-size:12px;color:#94a3b8;">Will you require visa sponsorship?</legend>
+              <div class="radios">
+                <label><input type="radio" name="require_sponsorship" value="Yes" /> Yes</label>
+                <label><input type="radio" name="require_sponsorship" value="No" /> No</label>
+              </div>
+            </fieldset>
+            <label>Short Project Highlights
+              <textarea name="project_highlights" rows="3"></textarea>
+            </label>
+            <label>Resume Upload <input type="file" name="resume" /></label>
+            <label>Cover Letter <textarea name="cover_letter" rows="2"></textarea></label>
+          </div>
+        `;
+      }
+    }
+    customElements.define("rose-auth-widget", RoseAuthWidget);
+
+    class RoseJobForm extends HTMLElement {
+      connectedCallback() {
+        const sr = this.attachShadow({ mode: "open" });
+        sr.innerHTML = `
+          <style>
+            .card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 22px; }
+            .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+            label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: #94a3b8; }
+            input { padding: 9px 11px; border-radius: 8px; border: 1px solid #334155; background: #090d16; color: #f8fafc; }
+          </style>
+          <div class="card">
+            <div class="grid">
+              <label>Full Name <input name="full_name" autocomplete="name" type="text" /></label>
+              <label>Email <input name="email" autocomplete="email" type="email" /></label>
+              <label>Phone <input name="phone" autocomplete="tel" type="tel" /></label>
+              <label>Location <input name="location" type="text" /></label>
+              <label>GitHub <input name="github" type="url" /></label>
+              <label>LinkedIn <input name="linkedin" type="url" /></label>
+              <label style="grid-column:1/-1;">Portfolio <input name="portfolio" type="url" /></label>
+            </div>
+            <rose-auth-widget></rose-auth-widget>
+            <button type="submit" style="margin-top:14px;padding:10px 20px;border:none;border-radius:8px;background:#22d3ee;color:#06080e;font-weight:700;">Submit Shadow Form</button>
+          </div>
+        `;
+      }
+    }
+    customElements.define("rose-job-form", RoseJobForm);
+  </script>
+</body>
+</html>
+

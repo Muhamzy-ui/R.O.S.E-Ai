@@ -1,0 +1,107 @@
+{
+  "_meta": {
+    "reference_width": 1672,
+    "reference_height": 941,
+    "reference_image": "assets/ui/reference_bg.png",
+    "clean_plate_image": "assets/ui/clean_plate.png",
+    "units": "pixels in 1672x941 reference coordinate space"
+  },
+  "window": {
+    "title_bar_drag": [0, 0, 1496, 40],
+    "minimize_btn": [1502, 4, 46, 34],
+    "maximize_btn": [1558, 4, 48, 34],
+    "close_btn": [1614, 4, 50, 34]
+  },
+  "header": {
+    "settings_box": [11, 43, 289, 77],
+    "settings_voice_text": [46, 84, 208, 20],
+    "title_area": [610, 44, 452, 66],
+    "online_indicator": [1532, 56, 112, 30],
+    "online_dot": [1538, 64, 15, 15],
+    "online_text": [1560, 58, 82, 25]
+  },
+  "time_panel": {
+    "card": [28, 126, 344, 142],
+    "header_city": [113, 134, 208, 22],
+    "clock_dial": [44, 162, 65, 65],
+    "clock_dial_hands_mask": [55, 174, 43, 43],
+    "clock_digits": [126, 168, 164, 40],
+    "seconds_digits": [310, 174, 46, 24],
+    "date_text": [126, 209, 218, 19],
+    "weekday_text": [126, 230, 190, 18]
+  },
+  "weather_panel": {
+    "card": [28, 268, 344, 140],
+    "header_city": [136, 274, 180, 21],
+    "icon": [54, 302, 62, 52],
+    "temp": [126, 302, 118, 40],
+    "city_right": [274, 302, 86, 19],
+    "lines": [124, 339, 230, 58]
+  },
+  "system_status": {
+    "card": [28, 408, 344, 182],
+    "uptime_value": [156, 439, 144, 22],
+    "cpu_bar": [161, 467, 148, 10],
+    "cpu_pct": [306, 463, 52, 17],
+    "ram_bar": [161, 491, 148, 10],
+    "ram_pct": [306, 487, 52, 17],
+    "disk_bar": [161, 514, 148, 10],
+    "disk_pct": [306, 510, 52, 17],
+    "battery_bar": [161, 537, 148, 10],
+    "battery_pct": [302, 533, 56, 17],
+    "net_up": [82, 553, 145, 22],
+    "net_down": [290, 553, 72, 22]
+  },
+  "health_summary": {
+    "card": [28, 590, 344, 140],
+    "lines": [
+      [78, 624, 278, 19],
+      [78, 643, 278, 19],
+      [78, 662, 278, 19],
+      [78, 681, 278, 19],
+      [78, 700, 278, 21]
+    ],
+    "all_lines": [78, 624, 278, 97]
+  },
+  "camera_vision": {
+    "card": [28, 730, 344, 174],
+    "status": [286, 738, 74, 20],
+    "thumbnail": [47, 760, 88, 84],
+    "text": [140, 768, 216, 48],
+    "identify_btn": [140, 853, 100, 35],
+    "live_btn": [247, 853, 110, 35]
+  },
+  "center": {
+    "globe_box": [555, 118, 560, 560],
+    "globe_center": [835, 398],
+    "globe_inner_radius": 160,
+    "globe_ring_radius": 224,
+    "waveform_band": [430, 356, 810, 88],
+    "pedestal_ring": [615, 650, 440, 72],
+    "pedestal_title": [772, 742, 128, 30],
+    "pedestal_status": [736, 774, 198, 30]
+  },
+  "dock": {
+    "panel": [424, 817, 824, 86],
+    "buttons": {
+      "LIVE": [442, 829, 116, 46],
+      "PAUSE": [564, 829, 124, 46],
+      "MINI ORB": [694, 829, 128, 46],
+      "INTERVIEW": [830, 829, 136, 46],
+      "JOBS": [974, 829, 108, 46],
+      "SHUTDOWN": [1090, 829, 138, 46]
+    }
+  },
+  "conversation": {
+    "panel": [1285, 126, 358, 777],
+    "header": [1288, 128, 352, 34],
+    "status": [1468, 137, 126, 22],
+    "mini_wave": [1596, 134, 42, 26],
+    "messages_clean_mask": [1300, 174, 250, 74],
+    "messages": [1296, 170, 336, 650],
+    "input_box": [1302, 833, 282, 38],
+    "input_placeholder_mask": [1314, 838, 172, 28],
+    "send_icon_btn": [1590, 831, 40, 42],
+    "send_label_btn": [1538, 898, 114, 34]
+  }
+}

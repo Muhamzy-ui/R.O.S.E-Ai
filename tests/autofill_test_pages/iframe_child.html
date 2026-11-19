@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iframe Child Form</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background: #0f172a; color: #e2e8f0; padding: 18px; margin: 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .full { grid-column: 1 / -1; }
+    label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: #94a3b8; }
+    input, select, textarea { padding: 8px 10px; border-radius: 8px; border: 1px solid #334155; background: #090d16; color: #f8fafc; }
+  </style>
+</head>
+<body>
+  <h3 style="margin-top:0;color:#22d3ee;">Child Iframe Application Form</h3>
+  <form id="iframe_child_form" onsubmit="event.preventDefault();">
+    <div class="grid">
+      <label>Phone <input name="phone" type="tel" /></label>
+      <label>Location <input name="location" type="text" /></label>
+      <label>GitHub <input name="urls[GitHub]" type="url" /></label>
+      <label>LinkedIn <input name="urls[LinkedIn]" type="url" /></label>
+      <label>Years Experience <input name="years_experience" type="text" /></label>
+      <label>Work Authorization
+        <select name="authorized_to_work">
+          <option value="">Select</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </label>
+      <label class="full">Resume Upload <input name="resume" type="file" /></label>
+      <label class="full">Cover Letter <textarea name="cover_letter" rows="2"></textarea></label>
+    </div>
+    <button type="submit" style="margin-top:12px;padding:9px 18px;border-radius:8px;border:none;background:#22d3ee;color:#06080e;font-weight:700;">Submit Iframe</button>
+  </form>
+</body>
+</html>
+

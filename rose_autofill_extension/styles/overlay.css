@@ -1,0 +1,6 @@
+/* Minimal non-intrusive stylesheet for R.O.S.E Autofill; primary UI is isolated inside Shadow DOM. */
+.rose-autofill-highlight {
+  outline: 2px solid #22D3EE !important;
+  outline-offset: 1px !important;
+}
+

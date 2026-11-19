@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>R.O.S.E Autofill Copilot</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="hdr">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>R.O.S.E Autofill</span>
+      </div>
+      <span id="status-badge" class="badge warn">Not Loaded</span>
+    </header>
+
+    <div class="toolbar">
+      <label class="btn glass file-btn">
+        Import rose_profile.json
+        <input id="file-import" type="file" accept=".json,application/json" hidden />
+      </label>
+      <button id="btn-export" type="button" class="btn glass">Export JSON</button>
+    </div>
+
+    <button id="btn-fill-now" type="button" class="btn primary full">
+      Fill Active Tab (Alt+Shift+F)
+    </button>
+
+    <div id="feedback" class="feedback" hidden></div>
+
+    <form id="profile-form" class="form-grid">
+      <label>Full Name <input id="f-full_name" type="text" /></label>
+      <div class="row-2">
+        <label>First Name <input id="f-first_name" type="text" /></label>
+        <label>Last Name <input id="f-last_name" type="text" /></label>
+      </div>
+      <div class="row-2">
+        <label>Email <input id="f-email" type="email" /></label>
+        <label>Phone <input id="f-phone" type="tel" /></label>
+      </div>
+      <div class="row-2">
+        <label>Location <input id="f-location" type="text" /></label>
+        <label>Years Exp <input id="f-years_experience" type="text" /></label>
+      </div>
+      <label>GitHub URL <input id="f-github" type="url" /></label>
+      <label>LinkedIn URL <input id="f-linkedin" type="url" /></label>
+      <label>Portfolio URL <input id="f-portfolio" type="url" /></label>
+
+      <div class="row-2">
+        <label>Authorized to Work
+          <select id="f-authorized_to_work">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </label>
+        <label>Needs Visa Sponsorship
+          <select id="f-requires_sponsorship">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+          </select>
+        </label>
+      </div>
+
+      <label>Short Project Highlights
+        <textarea id="f-project_highlights" rows="3"></textarea>
+      </label>
+
+      <label class="checkbox-row">
+        <input id="f-autofill_cover_letter" type="checkbox" />
+        <span>Also fill cover letter textarea if custom text is provided below</span>
+      </label>
+
+      <label>Optional Custom Cover Letter (skipped by default so you paste tailored pitches)
+        <textarea id="f-cover_letter" rows="2" placeholder="Leave blank to skip cover letter cleanly"></textarea>
+      </label>
+
+      <button type="submit" class="btn glass full">Save Profile to Chrome</button>
+    </form>
+
+    <p class="footer-note">
+      Never clicks Submit. File uploads (Resume/CV) cannot be set by extensions — attach your resume manually.
+    </p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
+

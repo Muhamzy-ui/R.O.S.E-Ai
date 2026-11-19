@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>R.O.S.E Autofill Test 2 — React-Style Controlled Inputs</title>
+  <style>
+    body { font-family: Segoe UI, sans-serif; background: #0b101b; color: #e2e8f0; max-width: 720px; margin: 32px auto; padding: 0 18px; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .full { grid-column: 1 / -1; }
+    label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #94a3b8; }
+    input, select, textarea { padding: 9px 11px; border-radius: 8px; border: 1px solid #334155; background: #090d16; color: #f8fafc; font-size: 14px; }
+    pre { background: #06080e; border: 1px solid #1e293b; border-radius: 10px; padding: 12px; color: #22d3ee; font-size: 12px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>React-Style Controlled Form (Test Page 2)</h2>
+    <p>Inputs override direct <code>el.value = ...</code> assignments like React controlled components. Only the native prototype setter + dispatched <code>input</code>/<code>change</code>/<code>blur</code> updates internal state below.</p>
+    <form id="react_form" onsubmit="event.preventDefault(); window.__submitCount = (window.__submitCount || 0) + 1;">
+      <div class="grid">
+        <label>Full Name <input id="rc-name" name="_systemfield_name" type="text" /></label>
+        <label>Email <input id="rc-email" name="_systemfield_email" type="email" /></label>
+        <label>Phone <input id="rc-phone" name="_systemfield_phone" type="tel" /></label>
+        <label>Location <input id="rc-location" name="_systemfield_location" type="text" /></label>
+        <label>GitHub <input id="rc-github" placeholder="https://github.com/..." type="url" /></label>
+        <label>LinkedIn <input id="rc-linkedin" placeholder="https://linkedin.com/in/..." type="url" /></label>
+        <label>Authorized to work remotely?
+          <select id="rc-auth" aria-label="Work authorization">
+            <option value="">Choose one</option>
+            <option value="authorized">Yes, authorized</option>
+            <option value="not_authorized">No</option>
+          </select>
+        </label>
+        <label>Years Experience
+          <select id="rc-yoe" name="years_experience">
+            <option value="">Choose range</option>
+            <option value="1">1 year</option>
+            <option value="3">2-4 years</option>
+            <option value="5">5+ years</option>
+          </select>
+        </label>
+        <label style="flex-direction:row;align-items:center;gap:8px;grid-column:1/-1;">
+          <input id="rc-remote-cb" type="checkbox" name="work_authorized" />
+          I am legally authorized to work remotely from my country
+        </label>
+        <label class="full">Resume Upload <input id="rc-resume" type="file" name="resume_upload" /></label>
+        <label class="full">Cover Letter <textarea id="rc-cover" name="cover_letter" rows="2"></textarea></label>
+      </div>
+      <button type="submit" style="margin-top:14px;padding:10px 18px;border-radius:8px;border:none;background:#8b5cf6;color:#fff;font-weight:700;">Submit (Must Never Auto-Click)</button>
+    </form>
+    <h4>Controlled Store Snapshot (must populate when R.O.S.E fills):</h4>
+    <pre id="store-view">{}</pre>
+  </div>
+
+  <script>
+    (function () {
+      const store = {};
+      window.__reactControlledStore = store;
+
+      function bindControlled(el, key, propName) {
+        const nativeDesc = Object.getOwnPropertyDescriptor(el.constructor.prototype, propName || "value");
+        let internalVal = propName === "checked" ? false : "";
+
+        // Simulates React ignoring naive `el.value = "foo"` unless native prototype setter + events run
+        Object.defineProperty(el, propName || "value", {
+          configurable: true,
+          get() {
+            return nativeDesc.get.call(this);
+          },
+          set(next) {
+            // Do NOT update store here when naive assignment is called; only update DOM visually or ignore
+            nativeDesc.set.call(this, internalVal);
+          }
+        });
+
+        el.addEventListener("input", () => {
+          internalVal = propName === "checked" ? nativeDesc.get.call(el) : nativeDesc.get.call(el);
+          store[key] = internalVal;
+          render();
+        });
+        el.addEventListener("change", () => {
+          internalVal = nativeDesc.get.call(el);
+          store[key] = internalVal;
+          render();
+        });
+      }
+
+      bindControlled(document.getElementById("rc-name"), "name");
+      bindControlled(document.getElementById("rc-email"), "email");
+      bindControlled(document.getElementById("rc-phone"), "phone");
+      bindControlled(document.getElementById("rc-location"), "location");
+      bindControlled(document.getElementById("rc-github"), "github");
+      bindControlled(document.getElementById("rc-linkedin"), "linkedin");
+      bindControlled(document.getElementById("rc-auth"), "auth");
+      bindControlled(document.getElementById("rc-yoe"), "yoe");
+      bindControlled(document.getElementById("rc-remote-cb"), "remote_cb", "checked");
+
+      function render() {
+        document.getElementById("store-view").textContent = JSON.stringify(store, null, 2);
+      }
+      render();
+    })();
+  </script>
+</body>
+</html>
+
